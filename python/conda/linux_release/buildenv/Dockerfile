@@ -48,4 +48,4 @@ ENV PATH /root/miniconda3/bin:$PATH
 COPY Miniconda3-4.5.4-Linux-x86_64.sh /root/
 RUN /bin/bash /root/Miniconda3-4.5.4-Linux-x86_64.sh -b && \
 	rm -f /root/Miniconda3*
-RUN conda install -y conda-build conda-verify conda=4.6.14
+RUN conda install -y conda-build conda-verify conda=4.7.11

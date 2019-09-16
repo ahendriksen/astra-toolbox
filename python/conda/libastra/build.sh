@@ -24,7 +24,14 @@ echo "int main(){return 0;}" > $CONDA_PREFIX/test.cu
 $NVCC $CONDA_PREFIX/test.cu -ccbin $CC --std=c++11 -o $CONDA_PREFIX/test.out > /dev/null 2>&1 && EXTRA_NVCCFLAGS="--std=c++11" || true
 rm -f $CONDA_PREFIX/test.out $CONDA_PREFIX/test.cu
 
-$SRC_DIR/build/linux/configure --with-install-type=prefix --with-cuda=$CUDA_ROOT --prefix=$CONDA_PREFIX NVCCFLAGS="-ccbin $CC -I$CONDA_PREFIX/include $EXTRA_NVCCFLAGS" CC=$CC CXX=$CXX CPPFLAGS="-I$CONDA_PREFIX/include"
+$SRC_DIR/build/linux/configure \
+    --with-install-type=prefix \
+    --with-cuda=$CUDA_ROOT \
+    --prefix=$CONDA_PREFIX \
+    NVCCFLAGS="-ccbin $CC -I$CONDA_PREFIX/include $EXTRA_NVCCFLAGS" \
+    CC=$CC \
+    CXX=$CXX \
+    CPPFLAGS="-I$CONDA_PREFIX/include"
 
 # Clean, because we may be re-using this source tree when building
 # multiple variants of this conda package.

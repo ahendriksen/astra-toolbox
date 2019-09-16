@@ -3,8 +3,8 @@ package:
   version: '1.9.0.dev11'
 
 source:
-  git_url: https://github.com/astra-toolbox/astra-toolbox.git
-  git_tag: master
+  git_url: https://github.com/ahendriksen/astra-toolbox.git
+  git_tag: use-conda-compiler-toolchain
 
 build:
   number: 0
@@ -14,15 +14,18 @@ build:
 
 requirements:
   build:
-    - {{compiler('c')}} # [win]
-    - boost # [osx]
+    - {{ compiler('c') }} # [win or linux]
+    - {{ compiler('cxx') }} # [linux]
+    - boost-cpp # [osx or linux]
     - automake # [osx]
     - autoconf # [osx]
     - libtool # [osx]
     - cudatoolkit {{ cudatoolkit }} # [linux]
-
+  host:
+    - boost-cpp # [osx or linux]
   run:
-    - cudatoolkit {{ cudatoolkit }} # [linux]
+    # See: https://github.com/conda-forge/conda-forge.github.io/issues/687#issuecomment-460095230
+    - {{ pin_compatible('cudatoolkit', max_pin='x.x') }} # [linux]
 
 about:
   home: http://www.astra-toolbox.com
